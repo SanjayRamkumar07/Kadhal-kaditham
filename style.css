@@ -1,0 +1,29 @@
+*{box-sizing:border-box}
+:root{--pink:#ffbddb;--bg:#1a0c21;--glass:rgba(255,255,255,.11)}
+body{margin:0;color:#fff;font-family:Georgia,"Times New Roman",serif;background:radial-gradient(circle at 50% 15%,#6d315f 0,#341637 40%,#120917 100%);min-height:100vh;overflow-x:hidden}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(18,7,23,.74);backdrop-filter:blur(10px)}
+.brand{font-weight:700;white-space:nowrap}.progress{flex:1;height:7px;background:rgba(255,255,255,.15);border-radius:9px;overflow:hidden}.progress div{height:100%;width:0;background:linear-gradient(90deg,#ffb5d1,#ffd7ae);transition:width .7s}
+#counter{font-size:.88rem;opacity:.86}
+.journey{min-height:calc(100vh - 115px);display:flex;align-items:center;justify-content:center;padding:28px 16px 110px}
+#stage{width:min(900px,100%);text-align:center}.enter{animation:enter .75s ease}
+.photo-box{width:min(58vw,370px);height:min(31vh,235px);min-height:165px;margin:0 auto 22px;position:relative}.gallery{height:100%;position:relative}
+.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:22px;opacity:0;transform:scale(.97);transition:opacity 1s,transform 1s;box-shadow:0 14px 36px rgba(0,0,0,.38);background:rgba(0,0,0,.12)}
+.photo.show{opacity:1;transform:scale(1)}
+.message-box{width:min(92vw,820px);margin:auto;padding:24px 24px 28px;background:var(--glass);border:1px solid rgba(255,255,255,.14);border-radius:28px;backdrop-filter:blur(12px);box-shadow:0 18px 60px rgba(0,0,0,.24)}
+.tiny{color:var(--pink);font-size:1.6rem}.message-box h1{font-size:clamp(1.85rem,4vw,3rem);margin:6px 0 18px}
+.message{font-size:clamp(1.08rem,2.4vw,1.34rem);line-height:1.9;min-height:90px}
+.video{width:min(72vw,520px);max-height:280px;margin:24px auto 0;display:block;border-radius:20px;box-shadow:0 12px 32px rgba(0,0,0,.4)}
+.controls{position:fixed;left:0;right:0;bottom:0;z-index:25;padding:12px 14px 15px;display:flex;justify-content:center;gap:10px;background:linear-gradient(transparent,rgba(14,6,19,.9) 30%);backdrop-filter:blur(7px)}
+.btn{border:1px solid rgba(255,255,255,.16);padding:11px 18px;border-radius:999px;color:#fff;background:rgba(255,255,255,.1);font-size:.98rem;cursor:pointer}.primary{background:linear-gradient(90deg,#b33870,#7f46a0);border:0}
+.side-hearts{position:fixed;top:0;bottom:0;width:84px;pointer-events:none;z-index:2;overflow:hidden}.side-hearts.left{left:0}.side-hearts.right{right:0}
+.side-hearts:before,.side-hearts:after{content:'❤️';position:absolute;bottom:-40px;font-size:24px;animation:float 7s linear infinite}.side-hearts:before{left:24px}.side-hearts:after{left:48px;animation-duration:9s;animation-delay:2s;content:'💗'}
+.right:before{left:42px;animation-duration:8s;animation-delay:1s}.right:after{left:18px;animation-duration:10s;animation-delay:3s}
+.petals:before,.petals:after{content:'🌹';position:fixed;top:-35px;z-index:1;font-size:18px;pointer-events:none;animation:fall 12s linear infinite}.petals:before{left:15%}.petals:after{left:78%;animation-delay:4s;animation-duration:14s}
+.sparkles:before,.sparkles:after{content:'✦';position:fixed;z-index:1;color:#fff0b4;font-size:18px;pointer-events:none;animation:twinkle 2.4s ease-in-out infinite}.sparkles:before{left:10%;top:38%}.sparkles:after{right:11%;top:65%;animation-delay:1.2s}
+.conf{position:fixed;top:-20px;z-index:50;font-size:20px;animation:confetti 3.2s ease-in forwards}
+@keyframes enter{from{opacity:0;transform:translateY(20px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes float{0%{transform:translateY(105vh) rotate(0);opacity:0}12%{opacity:.9}100%{transform:translateY(-18vh) rotate(28deg);opacity:0}}
+@keyframes fall{from{transform:translateY(-10vh) rotate(0)}to{transform:translateY(115vh) rotate(300deg)}}
+@keyframes twinkle{0%,100%{opacity:.1;transform:scale(.7)}50%{opacity:1;transform:scale(1.4)}}
+@keyframes confetti{from{transform:translateY(0) rotate(0);opacity:1}to{transform:translateY(110vh) rotate(360deg);opacity:0}}
+@media(max-width:600px){.topbar{padding:10px 12px}.brand{font-size:.9rem}.journey{padding-top:20px}.photo-box{width:min(63vw,300px);height:205px;min-height:160px}.message-box{padding:20px 17px 24px;border-radius:22px}.message{font-size:1.08rem;line-height:1.82}.side-hearts{width:45px}.side-hearts:before{left:8px}.side-hearts:after{left:25px}.video{width:80vw;max-height:230px}}

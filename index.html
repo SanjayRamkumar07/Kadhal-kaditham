@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#3a153f">
+<title>Namma Journey ❤️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="side-hearts left"></div><div class="side-hearts right"></div>
+<div class="petals"></div><div class="sparkles"></div><div id="confetti"></div>
+
+<header class="topbar">
+ <div class="brand">Namma Journey ❤️</div>
+ <div class="progress"><div id="bar"></div></div>
+ <div id="counter">1 / 8</div>
+</header>
+
+<main class="journey"><section id="stage"></section></main>
+
+<footer class="controls">
+ <button id="music" class="btn">🎵 Play Song</button>
+ <button id="next" class="btn primary">Continue ➜</button>
+</footer>
+
+<script>
+const stages=[{"title": "Hi Sangeerthana ❤️", "text": "Unakkaga naan oru chinna surprise prepare panniruken.<br><br>\n     Idhu oru gift nu solla mudiyadhu...<br><br>\n     Idhu namma memories, namma feelings, matrum un mela enakku irukkura anbu oda oru chinna journey.<br><br>\n     Indha 6 maasam la nadandha sila azhagana moments ah naan inga serthu vachiruken.<br><br>\n     Mudivu varaikum paaru... ❤️", "images": ["assets/photos/stage1.png"], "video": ""}, {"title": "Ellam Maarina Naal 🌸", "text": "February 12.<br><br>\n     Adhuku munnaadiyum nee special dhaan.<br><br>\n     Aana andha naal ku appuram, nee enakku konjam konjama romba special aayita.<br><br>\n     Pesura neram adhigama aachu.<br>\n     Ninaikkura neram adhigama aachu.<br><br>\n     Un message varum bodhu smile varra alavukku nee en daily life la mukkiyamaana oru part aayita.<br><br>\n     Adhu dhaan namma story oda azhagana beginning. ❤️", "images": ["assets/photos/stage2a.jpg", "assets/photos/stage2b.jpg"], "video": ""}, {"title": "Manasula Irundhadha Solliya Naal 💌", "text": "Namma close aaga aaga, nee enakku friendship ah vida adhigamaana idam edutha.<br><br>\n     Adha sollama irukka mudiyala.<br><br>\n     February 17 la indirect ah solla try panninen.<br><br>\n     February 18 la en feelings ah sonnen.<br><br>\n     Andha naal la dhaan, nee kooda adhe maari feel pannura nu therinjadhu.<br><br>\n     Andha santhosham ah vaarthaila solla mudiyadhu.<br><br>\n     Adhu en life la marakka mudiyadha naal. ❤️", "images": ["assets/photos/stage3.jpg"], "video": ""}, {"title": "Ovvoru Naalum Innum Azhaga ✨", "text": "Andha confession ku appuram, ovvoru naalum konjam konjama sweeter aayiduchu.<br><br>\n     Pesina santhosham. Sandhicha santhosham.<br><br>\n     Un kooda spend panna ovvoru nimishamum special ah thonuchu.<br><br>\n     Pazhaya valigal konjam konjama marandhuduchu.<br>\n     Pudhu memories create aana.<br><br>\n     Namma story oda best chapter appo dhaan start aachu. ❤️", "images": ["assets/photos/stage4.jpg"], "video": ""}, {"title": "Nee En Life La Nadandha Azhagana Vishayam ❤️", "text": "Naal pogapoga, nee en life la nadandha romba azhagana vishayangal la onnu nu purinjiduchu.<br><br>\n     Kashtamaana naal la smile kudutha.<br>\n     Nalla naal la innum adhigama santhosham kudutha.<br><br>\n     Marakka mudiyadha memories kudutha.<br><br>\n     Nee ennai naan ah irukka accept pannina vidham, en life la kedaicha periya blessing.<br><br>\n     Indha 6 maasam enakku romba special.<br><br>\n     Adhanala dhaan unakkaga oru chinna gift prepare panniruken. ❤️", "images": ["assets/photos/stage5a.jpg"], "video": ""}, {"title": "Oru Chinna Muyarchi 🎁", "text": "Unakkaga naan oru drawing panna try panninen.<br><br>\n     Naan artist illa.<br>\n     Perfect um illa.<br><br>\n     Aana enala mudinja alavukku best ah panna try panninen.<br><br>\n     Ovvoru line um, ovvoru shade um, unnai ninaichu dhaan pannadhu.<br><br>\n     Idha oru drawing ah paakadha.<br><br>\n     En manasoda oru chinna piece ah paaru. ❤️", "images": ["assets/photos/drawing_blurred.jpg"], "video": ""}, {"title": "Unakkaga ❤️", "text": "Indha drawing perfect ah irukkaadhu.<br><br>\n     Aana sincere ah pannadhu.<br><br>\n     Ovvoru stroke um unnai ninaichu pannadhu.<br><br>\n     Video la paakra ovvoru minute um, unakkaga spend pannina neram.<br><br>\n     Indha gift oda value drawing la illa...<br><br>\n     Adha panna manasula irukku. ❤️", "images": ["assets/photos/drawing.jpg"], "video": "assets/video/drawing_process.mp4"}, {"title": "One Last Thing... ❤️", "text": "Indha 6 maasam en life la marakka mudiyadha chapter.<br><br>\n     Nee kudutha memories, sirippu, care, matrum anbu-ku nandri.<br><br>\n     Un kooda irundha indha 6 maasam, enakku oru lifetime muzhukka adhe maari moments venumnu aasai padra alavukku podhum.<br><br>\n     Adhu dhaan nee enakku evlo special nu solludhu.<br><br>\n     Happy Six Months,<br>\n     My Dear Pretty Devil ❤️<br><br>\n     Forever grateful,<br><strong>— Sanjay ❤️</strong>", "images": ["assets/photos/final.png"], "video": ""}];
+const music=new Audio("assets/audio/Oh-Penne.mp3");
+music.loop=true;
+let idx=0,photo=0,photoTimer;
+
+const stage=document.getElementById('stage');
+const next=document.getElementById('next');
+const counter=document.getElementById('counter');
+const bar=document.getElementById('bar');
+
+function typeWriter(el, html, done){
+  el.innerHTML='';
+  let i=0;
+  const speed=8;
+  function go(){
+    if(i<html.length){ el.innerHTML=html.slice(0,i+=3); setTimeout(go,speed); }
+    else{el.innerHTML=html;if(done)done();}
+  }
+  go();
+}
+
+function render(){
+ clearTimeout(photoTimer);
+ const s=stages[idx]; photo=0;
+ stage.className='enter';
+ let gallery=s.images.length?'<div class="gallery">'+s.images.map((src,i)=>`<img class="photo ${i===0?'show':''}" src="${src}" alt="">`).join('')+'</div>':'';
+ let video=s.video?`<video class="video" controls playsinline preload="metadata"><source src="${s.video}"></video>`:'';
+ stage.innerHTML=`<div class="photo-box">${gallery}</div>
+ <div class="message-box"><div class="tiny">✦</div><h1>${s.title}</h1><div id="msg" class="message"></div>${video}</div>`;
+ typeWriter(document.getElementById('msg'),s.text);
+ counter.textContent=(idx+1)+' / '+stages.length;
+ bar.style.width=((idx)/(stages.length-1))*100+'%';
+ next.textContent=idx===5?'Open Your Gift 🎁':idx===7?'❤️ Start Again':'Continue ➜';
+ if(s.images.length>1) photoTimer=setTimeout(nextPhoto,4300);
+ if(idx===7) setTimeout(confetti,900);
+}
+
+function nextPhoto(){
+ const imgs=[...stage.querySelectorAll('.photo')];
+ if(imgs.length<2)return;
+ imgs[photo].classList.remove('show'); photo=(photo+1)%imgs.length; imgs[photo].classList.add('show');
+ photoTimer=setTimeout(nextPhoto,4300);
+}
+
+next.onclick=()=>{idx=idx===7?0:idx+1;render();};
+document.getElementById('music').onclick=async()=>{
+ try{ if(music.paused){await music.play();document.getElementById('music').textContent='⏸ Pause Song';}
+ else{music.pause();document.getElementById('music').textContent='🎵 Play Song';}}
+ catch(e){document.getElementById('music').textContent='🎵 Tap Again';}
+};
+
+function confetti(){
+ const c=document.getElementById('confetti');
+ for(let i=0;i<70;i++){let x=document.createElement('span');x.textContent=Math.random()>.5?'❤️':'✨';x.className='conf';x.style.left=Math.random()*100+'vw';x.style.animationDelay=(Math.random()*1.2)+'s';c.appendChild(x);setTimeout(()=>x.remove(),3500);}
+}
+render();
+</script>
+</body></html>
